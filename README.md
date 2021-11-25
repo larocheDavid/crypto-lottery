@@ -2,6 +2,7 @@
 
 #### Description:
 Ethereum based DAPP lottery.
+(DAPP=Decentralized application)
 
 #### Dev environment:
 
