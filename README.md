@@ -17,3 +17,11 @@ Ethereum based DAPP lottery.
 - metamask [user side]
 - drizzle (included in trufflesuite)
 - Ubuntu [20.04.3 LTS] (if we use a VM)
+
+
+
+###### tasks:
+- plugin <--> front
+- api <--> front
+- smart-contract <--> blockchain
+- better docs
