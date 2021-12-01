@@ -1,27 +1,40 @@
 # crypto-lottery
+crypto-lottery is an ethereum decentralized application project
 
-#### Description:
-Ethereum based DAPP lottery.
-(DAPP=Decentralized application)
+##### features
+- buy lottery ticket
+- make your own lottery with custom rules
+- earn money (cryptocurrency gambling)
 
-#### Dev environment:
+##### how it works
+- wallets are used in place of user accounts
+- smart-contract is deployed to blockchain to serve as backend
+- frontend exposes the web user interface
 
-###### smart-contract (hosted):
-- Solidity [v0.8.9]
-- chain-env: https://remix.ethereum.org/
-- truffle [v5.4.16]
+![fig1][1]
 
-###### frontend: (client side website)
-- nodejs & npm [14.18.1 LTS]
-- ethers [v5.5.1]
-- metamask [user side]
-- drizzle (included in trufflesuite)
-- Ubuntu [20.04.3 LTS] (if we use a VM)
+##### development tools
+- Hardhat (ethereum development environment)
+- Alchemy (blockchain developer platform)
+- Ropsten (test-net for live testing with fake ETH)
+- Metamask (cryptocurrency wallet as browser extension)
+- Vue.js (JavaScript framework)
+
+##### languages
+- HTML
+- CSS
+- JavaScript
+- Solidity
+
+##### team
+- damien.fangous@etu.hesge.ch
+- david.laroche@etu.hesge.ch
+- deniz.koprulu@etu.hesge.ch
+- besmir.silka@etu.hesge.ch
+- vincent.naf@etu.hesge.ch
+
+##### ressources
+- [Mastering Ethereum](https://github.com/ethereumbook/ethereumbook)
 
 
-
-###### tasks:
-- plugin <--> front
-- api <--> front
-- smart-contract <--> blockchain
-- better docs
+[1]: https://user-images.githubusercontent.com/12046663/38449785-ad633be8-39d9-11e8-995e-f9e947a6f35e.png
