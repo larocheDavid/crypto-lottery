@@ -36,7 +36,7 @@ yarn start
 
 ##### development tools
 - Hardhat (ethereum development environment)
-- Alchemy (blockchain developer platform)
+- Alchemy (blockchain node as a service)
 - Ropsten (test-net for live testing with fake ETH)
 - Metamask (cryptocurrency wallet as browser extension)
 - React (JavaScript framework)
