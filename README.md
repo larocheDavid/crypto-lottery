@@ -55,7 +55,10 @@ yarn start
 - vincent.naf@etu.hesge.ch
 
 ##### ressources
-- [Mastering Ethereum](https://github.com/ethereumbook/ethereumbook)
-
+- [Mastering Ethereum](https://github.com/ethereumbook/ethereumbook/)
+- [Alchemy Dashboard](https://dashboard.alchemyapi.io/)
+- [Ropsten Etherscan](https://ropsten.etherscan.io/)
+- [Metamask](https://metamask.io/)
+- [Hardhat](https://hardhat.org/)
 
 [1]: https://user-images.githubusercontent.com/12046663/38449785-ad633be8-39d9-11e8-995e-f9e947a6f35e.png
