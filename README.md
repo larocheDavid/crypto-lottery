@@ -40,7 +40,7 @@ yarn start
 - Alchemy (blockchain developer platform)
 - Ropsten (test-net for live testing with fake ETH)
 - Metamask (cryptocurrency wallet as browser extension)
-- Vue.js (JavaScript framework)
+- React (JavaScript framework)
 
 ##### languages
 - HTML
