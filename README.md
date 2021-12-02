@@ -29,9 +29,8 @@ be sure to replace ```<key>``` with your Alchemy API Key
 ```bash
 cd frontend
 echo 'REACT_APP_ALCHEMY_KEY = "wss://eth-ropsten.alchemyapi.io/v2/<key>"' > .env
-yarn add @alch/alchemy-web3
+export NODE_OPTIONS=--openssl-legacy-provider
 yarn install
-yarn upgrade
 yarn start
 ```
 
