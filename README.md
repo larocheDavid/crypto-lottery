@@ -13,6 +13,28 @@ crypto-lottery is an ethereum decentralized application project
 
 ![fig1][1]
 
+##### how to run backend
+TODO
+
+##### how to run frontend
+```bash
+node --version
+v16.0.0
+npm --version
+7.10.0
+yarn --version
+1.22.17
+```
+be sure to replace ```<key>``` with your Alchemy API Key
+```bash
+cd frontend
+echo 'REACT_APP_ALCHEMY_KEY = "wss://eth-ropsten.alchemyapi.io/v2/<key>"' > .env
+yarn add @alch/alchemy-web3
+yarn install
+yarn upgrade
+yarn start
+```
+
 ##### development tools
 - Hardhat (ethereum development environment)
 - Alchemy (blockchain developer platform)
