@@ -19,9 +19,6 @@ const HelloWorld = () => {
   const [status, setStatus] = useState("");
   const [message, setMessage] = useState("No connection to the network."); //default message
   const [newMessage, setNewMessage] = useState("");
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [statusLottery, setStatusLottery] = useState("");
 
   //called only once
@@ -86,8 +83,8 @@ const HelloWorld = () => {
     setStatus(status);
   };
 
-  const createLotteryPressed = async () => {
-    const {statusLottery} = await createLottery(name, email, password);
+  const createLotteryPressed = async (address) => {
+    const {statusLottery} = await createLottery();
     setStatusLottery(statusLottery);
   };
 
@@ -129,27 +126,7 @@ const HelloWorld = () => {
           Create Lottery
       </button>
       <p id="statusLottery">{statusLottery}</p>
-      <p>Name
-      <input
-          type="text"
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-        />
-      </p>
-      <p>Password
-      <input
-      type="text"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-        />
-      </p>
-      <p>email
-      <input
-      type="text"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-      />
-      </p>
+      
       </div>
 
     </div>

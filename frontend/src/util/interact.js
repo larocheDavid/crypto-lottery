@@ -3,7 +3,6 @@ const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
 
-
 const contractABI = require("../contract-abi.json");
 const contractAddress = "0x6f3f635A9762B47954229Ea479b4541eAF402A6A";
 
@@ -17,11 +16,20 @@ export const loadCurrentMessage = async () => {
   return message;
 };
 
-export const createLottery = async (name, email, password) => {
+export const createLottery = async (address) => {
+    //input error handling
+    if (!window.ethereum || address === null) {
+      return {
+        status:
+          "💡 Connect your Metamask wallet to create lottery on the blockchain.",
+      }
+    } else {
 
-  console.log(name);
-  let statusLottery = "Creating Lottery."
-  return statusLottery;
+  return {
+    status:
+    "Creating Lottery.",
+  }
+  }
 };
 
 export const connectWallet = async () => {
