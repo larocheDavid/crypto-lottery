@@ -1,4 +1,5 @@
 import React from "react";
+import Form from "./Form"
 import { useEffect, useState } from "react";
 import {
   helloWorldContract,
@@ -6,6 +7,8 @@ import {
   updateMessage,
   loadCurrentMessage,
   getCurrentWalletConnected,
+  createLottery,
+
 } from "./util/interact.js";
 
 import alchemylogo from "./alchemylogo.svg";
@@ -16,6 +19,10 @@ const HelloWorld = () => {
   const [status, setStatus] = useState("");
   const [message, setMessage] = useState("No connection to the network."); //default message
   const [newMessage, setNewMessage] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [statusLottery, setStatusLottery] = useState("");
 
   //called only once
   useEffect(async () => {
@@ -79,6 +86,11 @@ const HelloWorld = () => {
     setStatus(status);
   };
 
+  const createLotteryPressed = async () => {
+    const {statusLottery} = await createLottery(name, email, password);
+    setStatusLottery(statusLottery);
+  };
+
   //the UI of our component
   return (
     <div id="container">
@@ -112,7 +124,36 @@ const HelloWorld = () => {
           Update
         </button>
       </div>
+      <div>
+      <button id="lotteryButton" onClick={createLotteryPressed}>
+          Create Lottery
+      </button>
+      <p id="statusLottery">{statusLottery}</p>
+      <p>Name
+      <input
+          type="text"
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+        />
+      </p>
+      <p>Password
+      <input
+      type="text"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+        />
+      </p>
+      <p>email
+      <input
+      type="text"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+      />
+      </p>
+      </div>
+
     </div>
+    
   );
 };
 
