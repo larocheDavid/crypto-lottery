@@ -80,11 +80,13 @@ const HelloWorld = () => {
 
   const onUpdatePressed = async () => {
     const { status } = await updateMessage(walletAddress, newMessage);
+    console.log(status)
     setStatus(status);
   };
 
-  const createLotteryPressed = async (address) => {
-    const {statusLottery} = await createLottery();
+  const createLotteryPressed = async () => {
+    const { statusLottery } = await createLottery(walletAddress);
+    console.log(statusLottery)
     setStatusLottery(statusLottery);
   };
 

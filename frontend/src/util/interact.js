@@ -18,18 +18,20 @@ export const loadCurrentMessage = async () => {
 
 export const createLottery = async (address) => {
     //input error handling
-    if (!window.ethereum || address === null) {
+    console.log("adresse:", address)
+    if (!window.ethereum || address === "") {
+      //console.log("Connect your Metamask wallet to create lottery on the blockchain")
       return {
-        status:
-          "💡 Connect your Metamask wallet to create lottery on the blockchain.",
-      }
+        statusLottery:
+          "💡 Connect your wallet to create lottery on the blockchain.",
+      };
     } else {
-
-  return {
-    status:
-    "Creating Lottery.",
-  }
-  }
+      //console.log("Creating")
+      return {
+        statusLottery:
+          "Creating Lottery...",
+      };
+   }
 };
 
 export const connectWallet = async () => {
