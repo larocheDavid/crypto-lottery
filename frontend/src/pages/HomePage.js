@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "./Form"
+import Form from "../Form"
 import { useEffect, useState } from "react";
 import {
   helloWorldContract,
@@ -8,12 +8,11 @@ import {
   loadCurrentMessage,
   getCurrentWalletConnected,
   createLottery,
+} from "../util/interact.js";
+import CreateLottery from "../components/CreateLottery";
 
-} from "./util/interact.js";
 
-import alchemylogo from "./alchemylogo.svg";
-
-const HelloWorld = () => {
+const HomePage = () => {
   //state variables
   const [walletAddress, setWallet] = useState("");
   const [status, setStatus] = useState("");
@@ -93,7 +92,10 @@ const HelloWorld = () => {
   //the UI of our component
   return (
     <div id="container">
-      <img id="logo" src={alchemylogo}></img>
+      <CreateLottery
+        createLottery={(lottery => {console.log(lottery)})}
+        disabled={walletAddress.length === 0}
+      />
       <button id="walletButton" onClick={connectWalletPressed}>
         {walletAddress.length > 0 ? (
           "Connected: " +
@@ -104,7 +106,7 @@ const HelloWorld = () => {
           <span>Connect Wallet</span>
         )}
       </button>
-
+{/*
       <h2 style={{ paddingTop: "50px" }}>Current Message:</h2>
       <p>{message}</p>
 
@@ -129,11 +131,11 @@ const HelloWorld = () => {
       </button>
       <p id="statusLottery">{statusLottery}</p>
       
-      </div>
+      </div> */}
 
     </div>
     
   );
 };
 
-export default HelloWorld;
+export default HomePage;
