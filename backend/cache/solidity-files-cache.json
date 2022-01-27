@@ -1,8 +1,8 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/root/dapp/contracts/HelloWorld.sol": {
-      "lastModificationDate": 1638373344560,
+    "/home/dfa/Documents/crypto-lottery/backend/contracts/HelloWorld.sol": {
+      "lastModificationDate": 1643230070815,
       "contentHash": "32a7ffa33bf167fe9a94b8ba4bbf5af3",
       "sourceName": "contracts/HelloWorld.sol",
       "solcConfig": {
@@ -34,6 +34,41 @@
       ],
       "artifacts": [
         "HelloWorld"
+      ]
+    },
+    "/home/dfa/Documents/crypto-lottery/backend/contracts/Lotherum.sol": {
+      "lastModificationDate": 1643301136562,
+      "contentHash": "7bbba02813056869847215f5704775de",
+      "sourceName": "contracts/Lotherum.sol",
+      "solcConfig": {
+        "version": "0.7.3",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.3"
+      ],
+      "artifacts": [
+        "Lotherum"
       ]
     }
   }
