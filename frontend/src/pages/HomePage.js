@@ -17,13 +17,13 @@ const HomePage = () => {
   const [walletAddress, setWallet] = useState("");
   const [status, setStatus] = useState("");
   const [message, setMessage] = useState("No connection to the network."); //default message
-  const [newMessage, setNewMessage] = useState("");
+  // const [newMessage, setNewMessage] = useState("");
   const [statusLottery, setStatusLottery] = useState("");
 
   //called only once
   useEffect(async () => {
-    const message = await loadCurrentMessage();
-    setMessage(message);
+    // const message = await loadCurrentMessage();
+    // setMessage(message);
     addSmartContractListener();
 
     const { address, status } = await getCurrentWalletConnected();
@@ -35,15 +35,15 @@ const HomePage = () => {
   }, []);
 
   function addSmartContractListener() {
-    helloWorldContract.events.UpdatedMessages({}, (error, data) => {
-      if (error) {
-        setStatus("😥 " + error.message);
-      } else {
-        setMessage(data.returnValues[1]);
-        setNewMessage("");
-        setStatus("🎉 Your message has been updated!");
-      }
-    });
+    // helloWorldContract.events.UpdatedMessages({}, (error, data) => {
+    //   if (error) {
+    //     setStatus("😥 " + error.message);
+    //   } else {
+    //     setMessage(data.returnValues[1]);
+    //     setNewMessage("");
+    //     setStatus("🎉 Your message has been updated!");
+    //   }
+    // });
   }
 
   function addWalletListener() {
@@ -71,29 +71,26 @@ const HomePage = () => {
     }
   }
 
+  const handleCreateLottery = async (lottery) => {
+    try {
+      await createLottery(walletAddress, lottery);
+      console.log("lotteryCreated :", lottery)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const connectWalletPressed = async () => {
     const walletResponse = await connectWallet();
     setStatus(walletResponse.status);
     setWallet(walletResponse.address);
   };
 
-  const onUpdatePressed = async () => {
-    const { status } = await updateMessage(walletAddress, newMessage);
-    console.log(status)
-    setStatus(status);
-  };
-
-  const createLotteryPressed = async () => {
-    const { statusLottery } = await createLottery(walletAddress);
-    console.log(statusLottery)
-    setStatusLottery(statusLottery);
-  };
-
   //the UI of our component
   return (
     <div id="container">
       <CreateLottery
-        createLottery={(lottery => {console.log(lottery)})}
+        createLottery={handleCreateLottery}
         disabled={walletAddress.length === 0}
       />
       <button id="walletButton" onClick={connectWalletPressed}>
@@ -126,15 +123,11 @@ const HomePage = () => {
         </button>
       </div>
       <div>
-      <button id="lotteryButton" onClick={createLotteryPressed}>
-          Create Lottery
-      </button>
       <p id="statusLottery">{statusLottery}</p>
-      
       </div> */}
 
     </div>
-    
+
   );
 };
 
