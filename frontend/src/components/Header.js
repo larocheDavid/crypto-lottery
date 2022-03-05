@@ -1,11 +1,19 @@
+import React from 'react';
 import Connection from './Connection';
+
+
 const Header = () => {
-  return (
+
+  const {render, walletAddress} = Connection()
+
+  return {
+      walletAddress,
+      render:(
     <header className='header'>
         <h1>Crypto Lottery</h1>
-        <Connection />
+        {render}
     </header>
-  )
+  )}
 }
 
 export default Header

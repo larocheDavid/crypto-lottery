@@ -3,8 +3,13 @@ import { useEffect, useState } from "react";
 import { connectWallet, getCurrentWalletConnected } from "../util/interact.js";
 
 const Connection = () => {
+
+//function Connection() {
+
+//class Connection extends React.Component {
   //state variables
   const [walletAddress, setWallet] = useState("");
+  //const setWallet = useState("");
   const [status, setStatus] = useState("");
   const [message, setMessage] = useState("No connection to the network."); //default message
   // const [newMessage, setNewMessage] = useState("");
@@ -67,7 +72,9 @@ const Connection = () => {
     setWallet(walletResponse.address);
   };
 
-  return (
+  return {
+  walletAddress,
+  render:(
     <button id="walletButton" onClick={connectWalletPressed}>
       {walletAddress.length > 0 ? (
         "Connected: " +
@@ -77,8 +84,9 @@ const Connection = () => {
       ) : (
         <span>Connect Wallet</span>
       )}
+
     </button>
-  );
+  )}
 };
 
 export default Connection;

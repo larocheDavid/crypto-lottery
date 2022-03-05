@@ -1,13 +1,15 @@
+import React from 'react';
 import Header from "./components/Header";
-import HomePage from "./pages/HomePage";
 import Body from "./components/Body";
 import "./App.css";
 
 function App() {
+  const {render, walletAddress} = Header()
+
   return (
     <div>
-      <Header />
-      <HomePage />
+      {render}
+      <Body walletAddress = {walletAddress} />
     </div>
   );
 }
