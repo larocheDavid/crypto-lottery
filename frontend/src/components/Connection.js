@@ -1,18 +1,8 @@
 import React from "react";
-import Form from "../Form"
 import { useEffect, useState } from "react";
-import {
-  helloWorldContract,
-  connectWallet,
-  updateMessage,
-  loadCurrentMessage,
-  getCurrentWalletConnected,
-  createLottery,
-} from "../util/interact.js";
-import CreateLottery from "../components/CreateLottery";
+import { connectWallet, getCurrentWalletConnected } from "../util/interact.js";
 
-
-const HomePage = () => {
+const Connection = () => {
   //state variables
   const [walletAddress, setWallet] = useState("");
   const [status, setStatus] = useState("");
@@ -71,72 +61,24 @@ const HomePage = () => {
     }
   }
 
-  const handleCreateLottery = async (lottery) => {
-    try {
-      await createLottery(walletAddress, lottery);
-      console.log("lotteryCreated :", lottery)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
   const connectWalletPressed = async () => {
     const walletResponse = await connectWallet();
     setStatus(walletResponse.status);
     setWallet(walletResponse.address);
   };
 
-  //the UI of our component
   return (
-    
- /*
-    <div id="App-header">
-      
-      
-      <button id="walletButton" onClick={connectWalletPressed}>
-        {walletAddress.length > 0 ? (
-          "Connected: " +
-          String(walletAddress).substring(0, 6) +
-          "..." +
-          String(walletAddress).substring(38)
-        ) : (
-          <span>Connect Wallet</span>
-        )}
-      </button>
-{
-      <h2 style={{ paddingTop: "50px" }}>Current Message:</h2>
-      <p>{message}</p>
-
-      <h2 style={{ paddingTop: "18px" }}>New Message:</h2>
-
-      <div>
-        <input
-          type="text"
-          placeholder="Update the message in your smart contract."
-          onChange={(e) => setNewMessage(e.target.value)}
-          value={newMessage}
-        />
-        <p id="status">{status}</p>
-
-        <button id="publish" onClick={onUpdatePressed}>
-          Update
-        </button>
-      </div>
-      <div>
-      <p id="statusLottery">{statusLottery}</p>
-      </div> }
-
-    </div>
-    */
-    <div id="container">
-    <CreateLottery
-        createLottery={handleCreateLottery}
-        disabled={walletAddress.length === 0}
-      />
-      
-    </div>
-  
+    <button id="walletButton" onClick={connectWalletPressed}>
+      {walletAddress.length > 0 ? (
+        "Connected: " +
+        String(walletAddress).substring(0, 6) +
+        "..." +
+        String(walletAddress).substring(38)
+      ) : (
+        <span>Connect Wallet</span>
+      )}
+    </button>
   );
 };
 
-export default HomePage;
+export default Connection;
