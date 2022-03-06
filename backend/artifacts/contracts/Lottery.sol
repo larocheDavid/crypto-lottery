@@ -4,20 +4,22 @@ pragma solidity ^0.8.12;
 contract Lottery {
 
     address public owner;
+    address payable[] public players;
+    address payable public pot;
 
-    uint32 ticketPrice;
+    uint256 ticketPrice;
+    uint weiPrice = 1 wei;
     uint32 ticketsNumber;
-    address[] ticket;
     uint32 duration;
 
-    constructor(uint32 _ticketPrice, uint32 _ticketsNumber, uint32 _duration) {
+    constructor(uint256 _ticketPrice, uint32 _ticketsNumber, uint32 _duration) {
         owner = msg.sender;
         ticketPrice = _ticketPrice;
         ticketsNumber = _ticketsNumber;
         duration = _duration;
     }
 
-    function getTicketPrice() public view returns (uint32)  {
+    function getTicketPrice() public view returns (uint256)  {
         return ticketPrice;
     }
 
@@ -29,13 +31,15 @@ contract Lottery {
         return duration;
     }
     
-    function buy(address buyer, uint32 n ) public returns (uint32) {
+    function buyTickets(uint256 amount) public payable {
 
-        while (n != 0 && ticketsNumber != 0) {
-            ticket.push(buyer);
+        require(msg.value >= amount * ticketPrice * weiPrice);
+        require(ticketsNumber >= amount, "Not enough tickets to complete this purchase.");
+        while (amount != 0) {
+            players.push(payable(msg.sender));
             ticketsNumber--;
-            n--;
+            amount--;
         }
-        return ticketsNumber;
+        //players[index].transfer(...);
     }
 }
