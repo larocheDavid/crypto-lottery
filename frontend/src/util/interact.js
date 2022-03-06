@@ -21,7 +21,7 @@ export const createLottery = async (address, {name, ticketPrice, duration}) => {
   const transactionParameters = {
     from: address, // must match user's active address.
     to: contractAddress, // Required except during contract publications.
-    data: lotherumContract.methods.create_lottery(uint ticketPrice).encodeABI(),
+    data: lotherumContract.methods.create_lottery(name).encodeABI(),
   };
 
   console.log("sending transaction :", transactionParameters)
