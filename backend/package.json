@@ -11,6 +11,7 @@
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
     "@nomiclabs/hardhat-etherscan": "^2.1.8",
+    "ether": "^0.0.9",
     "ethers": "^5.5.4",
     "hardhat": "^2.9.1"
   },

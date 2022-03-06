@@ -14,8 +14,8 @@ module.exports = {
       hardhat: {},
       ropsten: {
          url: API_URL,
-         //accounts: [`0x${PRIVATE_KEY}`]
-         accounts: PRIVATE_KEY
+         accounts: [`0x${PRIVATE_KEY}`]
+         //accounts: PRIVATE_KEY
       }
   }/*
   etherscan: {

@@ -10,7 +10,7 @@ const Connection = () => {
   const [status, setStatus] = useState("");
   //const [message, setMessage] = useState("No connection to the network."); //default message
   // const [newMessage, setNewMessage] = useState("");
-  const [statusLottery, setStatusLottery] = useState("");
+  //const [statusLottery, setStatusLottery] = useState("");
 
   //called only once
   useEffect(async () => {

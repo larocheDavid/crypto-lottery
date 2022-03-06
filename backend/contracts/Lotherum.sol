@@ -1,27 +1,25 @@
 // SPDX-License-Identifier: HEPIA
 pragma solidity >=0.7.3;
 
-contract Lotherum { }
-/*
-
 contract Lotherum {
     address public owner;
     uint weiUnit = 1 wei;
 
     Lottery[] public lotteries;
 
-struct Lottery {
+    struct Lottery {
     
-    uint id;
-    uint ticketPrice;
-    uint ticketsNumber;
-    uint duration;
-    /*
-    address creator;
-    address payable[] players;
-    address payable pot;
-    */
-/*}
+        uint id;
+        uint ticketPrice;
+        uint ticketsNumber;
+        uint duration;
+        /*
+        address creator;
+        address payable[] players;
+        address payable pot;
+        */
+    }
+
     constructor() {
         owner = msg.sender;
     }
@@ -55,7 +53,7 @@ struct Lottery {
     function getDuration(uint id) public view returns (uint)  {
         return lotteries[find_lottery_index(id)].duration;
     }
-    
+   
     function buyTickets(uint id, uint amount) public payable {
 
         uint index = find_lottery_index(id);
@@ -68,4 +66,4 @@ struct Lottery {
         }
         //players[index].transfer(...);
     }
-}*/
+}
