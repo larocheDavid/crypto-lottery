@@ -9,7 +9,10 @@ function App() {
   return (
     <div>
       {render}
+      <div id="container">
       <Body walletAddress = {walletAddress} />
+      
+      </div>
     </div>
   );
 }

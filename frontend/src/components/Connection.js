@@ -4,14 +4,11 @@ import { connectWallet, getCurrentWalletConnected } from "../util/interact.js";
 
 const Connection = () => {
 
-//function Connection() {
-
-//class Connection extends React.Component {
   //state variables
   const [walletAddress, setWallet] = useState("");
   //const setWallet = useState("");
   const [status, setStatus] = useState("");
-  const [message, setMessage] = useState("No connection to the network."); //default message
+  //const [message, setMessage] = useState("No connection to the network."); //default message
   // const [newMessage, setNewMessage] = useState("");
   const [statusLottery, setStatusLottery] = useState("");
 

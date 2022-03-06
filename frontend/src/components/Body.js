@@ -1,5 +1,4 @@
 import React from "react";
-import Connection from "./Connection";
 import CreateLottery from "./CreateLottery";
 import { createLottery } from "../util/interact.js";
 
@@ -12,12 +11,14 @@ const Body = ({walletAddress}) => {
       console.log(error);
     }
   };
+
   return (
-    <div id="body">
+    <div>
       <CreateLottery
         createLottery={handleCreateLottery}
         disabled={walletAddress.length === 0}
       />
+      
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import ViewLottery from "./ViewLottery";
 import { useEffect, useState } from "react";
 import {
     TextField,
@@ -82,6 +83,8 @@ const CreateLottery = ({ createLottery, disabled }) => {
                     </Button>
                 </DialogActions>
             </Dialog>
+
+           <ViewLottery name = {name} ticketPrice = {ticketPrice} duration = {duration} />
         </>
     )
 }

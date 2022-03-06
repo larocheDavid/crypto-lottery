@@ -1,7 +1,6 @@
 import React from 'react';
 import Connection from './Connection';
 
-
 const Header = () => {
 
   const {render, walletAddress} = Connection()
