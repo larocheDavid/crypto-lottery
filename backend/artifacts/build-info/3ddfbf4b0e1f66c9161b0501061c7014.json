@@ -1,0 +1,108 @@
+{
+  "id": "3ddfbf4b0e1f66c9161b0501061c7014",
+  "_format": "hh-sol-build-info-1",
+  "solcVersion": "0.7.3",
+  "solcLongVersion": "0.7.3+commit.9bfce1f6",
+  "input": {
+    "language": "Solidity",
+    "sources": {
+      "contracts/Lotherum.sol": {
+        "content": "// SPDX-License-Identifier: HEPIA\npragma solidity >=0.7.3;\n\ncontract Lotherum { }\n/*\n\ncontract Lotherum {\n    address public owner;\n    uint weiUnit = 1 wei;\n\n    Lottery[] public lotteries;\n\nstruct Lottery {\n    \n    uint id;\n    uint ticketPrice;\n    uint ticketsNumber;\n    uint duration;\n    /*\n    address creator;\n    address payable[] players;\n    address payable pot;\n    */\n/*}\n    constructor() {\n        owner = msg.sender;\n    }\n    event createdLottered(uint lottery_id);\n\n    function create_lottery(uint  id, uint ticketPrice, uint ticketsNumber, uint duration) public {\n        Lottery memory new_lottery = Lottery(id, ticketPrice, ticketsNumber, duration);\n        //Lottery[] lottery = new \n        lotteries.push(new_lottery);\n        emit createdLottered(new_lottery.id);\n    }\n\n    function find_lottery_index(uint id) public view returns (uint) {\n        for (uint i=0; i<lotteries.length; i++) {\n            if(lotteries[i].id == id){\n                return i;\n            }\n        }\n        return 1000; \n    }\n\n    function getTicketPrice(uint id) public view returns (uint)  {\n        //require(find_lottery(id) == id, \"Lottery not find.\");\n        return lotteries[find_lottery_index(id)].ticketPrice;\n    }\n\n    function getTicketsNumber(uint id) public view returns (uint)  {\n        return lotteries[find_lottery_index(id)].ticketsNumber;\n    }\n\n    function getDuration(uint id) public view returns (uint)  {\n        return lotteries[find_lottery_index(id)].duration;\n    }\n    \n    function buyTickets(uint id, uint amount) public payable {\n\n        uint index = find_lottery_index(id);\n        require(msg.value >= amount * lotteries[index].ticketPrice * weiUnit);\n        require(lotteries[index].ticketsNumber >= amount, \"Not enough tickets to complete this purchase.\");\n        while (amount != 0) {\n            //lotteries[index].players.push(payable(msg.sender));\n            lotteries[index].ticketsNumber--;\n            amount--;\n        }\n        //players[index].transfer(...);\n    }\n}*/\n"
+      }
+    },
+    "settings": {
+      "optimizer": {
+        "enabled": false,
+        "runs": 200
+      },
+      "outputSelection": {
+        "*": {
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers",
+            "metadata"
+          ],
+          "": [
+            "ast"
+          ]
+        }
+      }
+    }
+  },
+  "output": {
+    "contracts": {
+      "contracts/Lotherum.sol": {
+        "Lotherum": {
+          "abi": [],
+          "evm": {
+            "bytecode": {
+              "generatedSources": [],
+              "linkReferences": {},
+              "object": "6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea264697066735822122090476449aa3e043fbb6b5ec3d0151477c7dcb8203536209e59013ed544a99d6c64736f6c63430007030033",
+              "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH1 0xF JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x3F DUP1 PUSH1 0x1D PUSH1 0x0 CODECOPY PUSH1 0x0 RETURN INVALID PUSH1 0x80 PUSH1 0x40 MSTORE PUSH1 0x0 DUP1 REVERT INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 SWAP1 SELFBALANCE PUSH5 0x49AA3E043F 0xBB PUSH12 0x5EC3D0151477C7DCB8203536 KECCAK256 SWAP15 MSIZE ADD RETURNDATACOPY 0xD5 DIFFICULTY 0xA9 SWAP14 PUSH13 0x64736F6C634300070300330000 ",
+              "sourceMap": "60:21:0:-:0;;;;;;;;;;;;;;;;;;;"
+            },
+            "deployedBytecode": {
+              "generatedSources": [],
+              "immutableReferences": {},
+              "linkReferences": {},
+              "object": "6080604052600080fdfea264697066735822122090476449aa3e043fbb6b5ec3d0151477c7dcb8203536209e59013ed544a99d6c64736f6c63430007030033",
+              "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE PUSH1 0x0 DUP1 REVERT INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 SWAP1 SELFBALANCE PUSH5 0x49AA3E043F 0xBB PUSH12 0x5EC3D0151477C7DCB8203536 KECCAK256 SWAP15 MSIZE ADD RETURNDATACOPY 0xD5 DIFFICULTY 0xA9 SWAP14 PUSH13 0x64736F6C634300070300330000 ",
+              "sourceMap": "60:21:0:-:0;;;;;"
+            },
+            "methodIdentifiers": {}
+          },
+          "metadata": "{\"compiler\":{\"version\":\"0.7.3+commit.9bfce1f6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/Lotherum.sol\":\"Lotherum\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/Lotherum.sol\":{\"keccak256\":\"0x1ef77eadd00a813dbde0b146c44a9f175db0cae6aa9bccbd106d68f6780ab066\",\"license\":\"HEPIA\",\"urls\":[\"bzz-raw://ffb0e6834dbaeee586b603a1a82adfd634a06deee3be88eeeaf8fda783081f35\",\"dweb:/ipfs/QmeX9HtU2MY7fC2BkVZYuhcmEUru9AyneoT2L7mTz4caRE\"]}},\"version\":1}"
+        }
+      }
+    },
+    "sources": {
+      "contracts/Lotherum.sol": {
+        "ast": {
+          "absolutePath": "contracts/Lotherum.sol",
+          "exportedSymbols": {
+            "Lotherum": [
+              2
+            ]
+          },
+          "id": 3,
+          "license": "HEPIA",
+          "nodeType": "SourceUnit",
+          "nodes": [
+            {
+              "id": 1,
+              "literals": [
+                "solidity",
+                ">=",
+                "0.7",
+                ".3"
+              ],
+              "nodeType": "PragmaDirective",
+              "src": "34:24:0"
+            },
+            {
+              "abstract": false,
+              "baseContracts": [],
+              "contractDependencies": [],
+              "contractKind": "contract",
+              "fullyImplemented": true,
+              "id": 2,
+              "linearizedBaseContracts": [
+                2
+              ],
+              "name": "Lotherum",
+              "nodeType": "ContractDefinition",
+              "nodes": [],
+              "scope": 3,
+              "src": "60:21:0"
+            }
+          ],
+          "src": "34:1997:0"
+        },
+        "id": 0
+      }
+    }
+  }
+}

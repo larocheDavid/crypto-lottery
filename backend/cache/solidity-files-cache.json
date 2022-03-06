@@ -1,44 +1,9 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/home/dfa/Documents/crypto-lottery/backend/contracts/HelloWorld.sol": {
-      "lastModificationDate": 1643230070815,
-      "contentHash": "32a7ffa33bf167fe9a94b8ba4bbf5af3",
-      "sourceName": "contracts/HelloWorld.sol",
-      "solcConfig": {
-        "version": "0.7.3",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.3"
-      ],
-      "artifacts": [
-        "HelloWorld"
-      ]
-    },
-    "/home/dfa/Documents/crypto-lottery/backend/contracts/Lotherum.sol": {
-      "lastModificationDate": 1643301136562,
-      "contentHash": "7bbba02813056869847215f5704775de",
+    "/home/david/Documents/Hepia/crypto_lottery/crypto-lottery/backend/contracts/Lotherum.sol": {
+      "lastModificationDate": 1646579001705,
+      "contentHash": "ab84c44fead6c54009aef0ccf6a3292f",
       "sourceName": "contracts/Lotherum.sol",
       "solcConfig": {
         "version": "0.7.3",

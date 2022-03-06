@@ -1,34 +1,71 @@
-// Specifies the version of Solidity, using semantic versioning.
-// Learn more: https://solidity.readthedocs.io/en/v0.5.10/layout-of-source-files.html#pragma
+// SPDX-License-Identifier: HEPIA
 pragma solidity >=0.7.3;
 
-// Defines a contract named `HelloWorld`.
-// A contract is a collection of functions and data (its state). Once deployed, a contract resides at a specific address on the Ethereum blockchain. Learn more: https://solidity.readthedocs.io/en/v0.5.10/structure-of-a-contract.html
-contract Lotherum {
-    struct Lottery {
-        string Name;
-        // uint EntryPrice;
-        // uint Duration;
-    }
-    event createdLottered(string new_lottery_name);
+contract Lotherum { }
+/*
 
-    // Declares a state variable `message` of type `string`.
-    // State variables are variables whose values are permanently stored in contract storage. The keyword `public` makes variables accessible from outside a contract and creates a function that other contracts or clients can call to access the value.
+contract Lotherum {
+    address public owner;
+    uint weiUnit = 1 wei;
+
     Lottery[] public lotteries;
 
-    // Similar to many class-based object-oriented languages, a constructor is a special function that is only executed upon contract creation.
-    // Constructors are used to initialize the contract's data. Learn more:https://solidity.readthedocs.io/en/v0.5.10/contracts.html#constructors
-    constructor() {}
-
-    // function create_lottery(string memory name, uint entry_price, uint duration) public {
-    //     Lottery memory new_lottery = Lottery(name, entry_price, duration);
-    //     lotteries.push(new_lottery);
-    //     emit createdLottered(new_lottery.Name);
-    // }
-    function create_lottery(string memory name) public {
-        Lottery memory new_lottery = Lottery(name);
-        lotteries.push(new_lottery);
-        emit createdLottered(new_lottery.Name);
+struct Lottery {
+    
+    uint id;
+    uint ticketPrice;
+    uint ticketsNumber;
+    uint duration;
+    /*
+    address creator;
+    address payable[] players;
+    address payable pot;
+    */
+/*}
+    constructor() {
+        owner = msg.sender;
     }
-}
+    event createdLottered(uint lottery_id);
 
+    function create_lottery(uint  id, uint ticketPrice, uint ticketsNumber, uint duration) public {
+        Lottery memory new_lottery = Lottery(id, ticketPrice, ticketsNumber, duration);
+        //Lottery[] lottery = new 
+        lotteries.push(new_lottery);
+        emit createdLottered(new_lottery.id);
+    }
+
+    function find_lottery_index(uint id) public view returns (uint) {
+        for (uint i=0; i<lotteries.length; i++) {
+            if(lotteries[i].id == id){
+                return i;
+            }
+        }
+        return 1000; 
+    }
+
+    function getTicketPrice(uint id) public view returns (uint)  {
+        //require(find_lottery(id) == id, "Lottery not find.");
+        return lotteries[find_lottery_index(id)].ticketPrice;
+    }
+
+    function getTicketsNumber(uint id) public view returns (uint)  {
+        return lotteries[find_lottery_index(id)].ticketsNumber;
+    }
+
+    function getDuration(uint id) public view returns (uint)  {
+        return lotteries[find_lottery_index(id)].duration;
+    }
+    
+    function buyTickets(uint id, uint amount) public payable {
+
+        uint index = find_lottery_index(id);
+        require(msg.value >= amount * lotteries[index].ticketPrice * weiUnit);
+        require(lotteries[index].ticketsNumber >= amount, "Not enough tickets to complete this purchase.");
+        while (amount != 0) {
+            //lotteries[index].players.push(payable(msg.sender));
+            lotteries[index].ticketsNumber--;
+            amount--;
+        }
+        //players[index].transfer(...);
+    }
+}*/
