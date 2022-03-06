@@ -19,9 +19,9 @@ export const lotherumContract = new web3.eth.Contract(
 export const createLottery = async (address, {name, ticketPrice, duration}) => {
   console.log("creating lottery ...")
   const transactionParameters = {
-    to: contractAddress, // Required except during contract publications.
     from: address, // must match user's active address.
-    data: lotherumContract.methods.create_lottery(name).encodeABI(),
+    to: contractAddress, // Required except during contract publications.
+    data: lotherumContract.methods.create_lottery(uint ticketPrice).encodeABI(),
   };
 
   console.log("sending transaction :", transactionParameters)
