@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: HEPIA
 pragma solidity >=0.7.3;
+pragma experimental ABIEncoderV2;
 
 contract Lotherum {
     address public owner;
