@@ -131,7 +131,7 @@ export const getCurrentWalletConnected = async () => {
 };
 
 export const getLotteries = async () => {
-  const await name = lotherumContract.methods.create_lottery(name).encodeABI()
+  //const await name = lotherumContract.methods.create_lottery(name).encodeABI()
   return ["lottery1", "lottery2"];
 }
 
