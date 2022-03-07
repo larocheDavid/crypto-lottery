@@ -4,11 +4,7 @@ import "./App.css";
 
 function App() {
 
-  return (
-    <div>
-      <HomePage></HomePage>
-    </div>
-  );
+  return ( <HomePage></HomePage> );
 }
 
 export default App;

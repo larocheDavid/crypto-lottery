@@ -9,7 +9,7 @@ contract Lotherum {
 
     struct Lottery {
     
-        uint id;
+        string name;
         uint ticketPrice;
         uint ticketsNumber;
         uint duration;
@@ -23,40 +23,48 @@ contract Lotherum {
     constructor() {
         owner = msg.sender;
     }
-    event createdLottered(uint lottery_id);
+    event createdLottered(string lottery_id);
 
-    function create_lottery(uint  id, uint ticketPrice, uint ticketsNumber, uint duration) public {
-        Lottery memory new_lottery = Lottery(id, ticketPrice, ticketsNumber, duration);
+    function create_lottery(string memory name, uint ticketPrice, uint ticketsNumber, uint duration) public {
+        Lottery memory new_lottery = Lottery(name, ticketPrice, ticketsNumber, duration);
         //Lottery[] lottery = new 
         lotteries.push(new_lottery);
-        emit createdLottered(new_lottery.id);
+        emit createdLottered( new_lottery.name);
     }
 
-    function find_lottery_index(uint id) public view returns (uint) {
+    function find_lottery_index(string memory name) public view returns (uint) {
         for (uint i=0; i<lotteries.length; i++) {
-            if(lotteries[i].id == id){
+            if(keccak256(bytes(lotteries[i].name)) == keccak256(bytes(name))) {
                 return i;
             }
         }
         return 1000; 
     }
 
-    function getTicketPrice(uint id) public view returns (uint)  {
+    /*function get_lottery(string memory name) public view returns (Lottery) {
+        return lotteries[find_lottery_index(name)];
+    }*/
+
+    function get_lotteries() public view returns (Lottery[] memory) {
+        return lotteries;
+    }
+
+    function getTicketPrice(string memory name) public view returns (uint)  {
         //require(find_lottery(id) == id, "Lottery not find.");
-        return lotteries[find_lottery_index(id)].ticketPrice;
+        return lotteries[find_lottery_index(name)].ticketPrice;
     }
 
-    function getTicketsNumber(uint id) public view returns (uint)  {
-        return lotteries[find_lottery_index(id)].ticketsNumber;
+    function getTicketsNumber(string memory name) public view returns (uint)  {
+        return lotteries[find_lottery_index(name)].ticketsNumber;
     }
 
-    function getDuration(uint id) public view returns (uint)  {
-        return lotteries[find_lottery_index(id)].duration;
+    function getDuration(string memory name) public view returns (uint)  {
+        return lotteries[find_lottery_index(name)].duration;
     }
    
-    function buyTickets(uint id, uint amount) public payable {
+    function buyTickets(string memory name, uint amount) public payable {
 
-        uint index = find_lottery_index(id);
+        uint index = find_lottery_index(name);
         require(msg.value >= amount * lotteries[index].ticketPrice * weiUnit);
         require(lotteries[index].ticketsNumber >= amount, "Not enough tickets to complete this purchase.");
         while (amount != 0) {
