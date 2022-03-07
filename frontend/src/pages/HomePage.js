@@ -1,5 +1,6 @@
 import React from "react";
 import Form from "../Form"
+import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import {
   helloWorldContract,
@@ -93,7 +94,17 @@ const HomePage = () => {
 
   //the UI of our component
   return (
-    
+    <>
+    <div> 
+  <Header walletAddress = {walletAddress} setWallet = {setWallet} /> 
+  
+  <CreateLottery
+      createLottery={handleCreateLottery}
+      disabled={walletAddress.length === 0}
+    />
+    </div>
+        </>
+  );
  /*
     <div id="App-header">
       
@@ -133,6 +144,7 @@ const HomePage = () => {
 
     </div>
     */
+   /*
     <div id="container">
     <CreateLottery
       createLottery={handleCreateLottery}
@@ -140,8 +152,8 @@ const HomePage = () => {
     />
       
     </div>
-  
-  );
+  */
+  //)}
 };
 
 export default HomePage;
