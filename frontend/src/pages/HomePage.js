@@ -1,5 +1,6 @@
 import React from "react";
 import Form from "../Form"
+import ViewLottery from "../components/ViewLottery";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import {
@@ -96,14 +97,13 @@ const HomePage = () => {
   return (
     <>
     <div> 
-  <Header walletAddress = {walletAddress} setWallet = {setWallet} /> 
+      <Header walletAddress = {walletAddress} setWallet = {setWallet} /> 
   
-  <CreateLottery
-      createLottery={handleCreateLottery}
-      disabled={walletAddress.length === 0}
-    />
+      <CreateLottery createLottery={handleCreateLottery} disabled={walletAddress.length === 0} />
+
+      <ViewLottery name = {"name"} ticketPrice = {3424} duration = {234} />
     </div>
-        </>
+    </>
   );
  /*
     <div id="App-header">
