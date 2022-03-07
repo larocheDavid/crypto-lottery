@@ -13,13 +13,10 @@ const Body = ({walletAddress}) => {
   };
 
   return (
-    <div>
-      <CreateLottery
-        createLottery={handleCreateLottery}
-        disabled={walletAddress.length === 0}
-      />
-      
-    </div>
+    <CreateLottery
+      createLottery={handleCreateLottery}
+      disabled={walletAddress.length === 0}
+    />     
   );
 };
 

@@ -8,6 +8,7 @@ import {
   loadCurrentMessage,
   getCurrentWalletConnected,
   createLottery,
+  getLotteries,
 } from "../util/interact.js";
 import CreateLottery from "../components/CreateLottery";
 
@@ -19,6 +20,7 @@ const HomePage = () => {
   const [message, setMessage] = useState("No connection to the network."); //default message
   // const [newMessage, setNewMessage] = useState("");
   const [statusLottery, setStatusLottery] = useState("");
+  const [lotteries, setLotteries] = useState([]);
 
   //called only once
   useEffect(async () => {
@@ -28,6 +30,9 @@ const HomePage = () => {
 
     const { address, status } = await getCurrentWalletConnected();
 
+    const lotteries_ = await getLotteries();
+
+    setLotteries(lotteries_);
     setWallet(address);
     setStatus(status);
 
@@ -130,9 +135,9 @@ const HomePage = () => {
     */
     <div id="container">
     <CreateLottery
-        createLottery={handleCreateLottery}
-        disabled={walletAddress.length === 0}
-      />
+      createLottery={handleCreateLottery}
+      disabled={walletAddress.length === 0}
+    />
       
     </div>
   

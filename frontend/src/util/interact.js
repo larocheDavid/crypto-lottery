@@ -130,6 +130,10 @@ export const getCurrentWalletConnected = async () => {
   }
 };
 
+export const getLotteries = async () => {
+  return ["lottery1", "lottery2"];
+}
+
 // export const updateMessage = async (address, message) => {
 //   //input error handling
 //   if (!window.ethereum || address === null) {
