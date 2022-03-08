@@ -104,7 +104,7 @@ const HomePage = () => {
         />
       </div>
       <div id="container">
-        <ViewLottery name={"name"} ticketPrice={3424} duration={234} />
+        <ViewLottery name={"Lottery1"} ticketPrice={3424} duration={234} />
       </div>
     </>
   );
