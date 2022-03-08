@@ -27,13 +27,13 @@ const ViewLottery = (props) => {
   };
 
   const columns = [
-    { field: "name_", headerName: "Name", width: 70 },
+    { field: "id", headerName: "Name", width: 70 },
     { field: "ticketPrice_", headerName: "Ticket Price", width: 130 },
     { field: "duration_", headerName: "Duration", width: 130 },
   ];
 
   const rows = [
-    { name_: name, ticketPrice_: ticketPrice, duration_: duration },
+    { id: name, ticketPrice_: ticketPrice, duration_: duration },
   ];
 
   return (
@@ -48,12 +48,12 @@ const ViewLottery = (props) => {
       >
         <DialogTitle id="form-dialog-title">View Lottery</DialogTitle>
         <DialogContent>
-          <div style={{ height: 400, width: "100%" }}>
+        <div style={{ height: 400, width: "100%" }}>
             <DataGrid
               rows={rows}
               columns={columns}
               pageSize={5}
-              rowsPerPageOptions={[5]}
+              rowsPerPageOptions={[1]}
               checkboxSelection
             />
           </div>
