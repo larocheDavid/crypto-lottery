@@ -10,11 +10,7 @@ import {
   DialogTitle,
 } from "@material-ui/core";
 
-//const ViewLottery = ({name, ticketPrice, duration}) => {
-const ViewLottery = (props) => {
-  const name = props.name;
-  const ticketPrice = props.ticketPrice;
-  const duration = props.duration;
+const ViewLottery = ({name, ticketPrice, duration}) => {
 
   const [open, setOpen] = React.useState(false);
 
@@ -28,12 +24,12 @@ const ViewLottery = (props) => {
 
   const columns = [
     { field: "id", headerName: "Name", width: 70 },
-    { field: "ticketPrice_", headerName: "Ticket Price", width: 130 },
-    { field: "duration_", headerName: "Duration", width: 130 },
+    { field: "ticketPrice", headerName: "Ticket Price", width: 130 },
+    { field: "duration", headerName: "Duration", width: 130 },
   ];
 
   const rows = [
-    { id: name, ticketPrice_: ticketPrice, duration_: duration },
+    { id: name, ticketPrice: ticketPrice, duration: duration },
   ];
 
   return (
@@ -48,13 +44,12 @@ const ViewLottery = (props) => {
       >
         <DialogTitle id="form-dialog-title">View Lottery</DialogTitle>
         <DialogContent>
-        <div style={{ height: 400, width: "100%" }}>
+        <div style={{ height: 400, width: '100%'}}>
             <DataGrid
               rows={rows}
               columns={columns}
               pageSize={5}
-              rowsPerPageOptions={[1]}
-              checkboxSelection
+              rowsPerPageOptions={[5]}
             />
           </div>
         </DialogContent>
