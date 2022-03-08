@@ -23,7 +23,7 @@ const ViewLottery = ({name, ticketPrice, duration}) => {
   };
 
   const columns = [
-    { field: "id", headerName: "Name", width: 70 },
+    { field: "id", headerName: "Name", width: 130 },
     { field: "ticketPrice", headerName: "Ticket Price", width: 130 },
     { field: "duration", headerName: "Duration", width: 130 },
   ];
@@ -64,30 +64,3 @@ const ViewLottery = ({name, ticketPrice, duration}) => {
 };
 
 export default ViewLottery;
-
- /*
-    const renderForm = () => {
-        return (
-            
-            
-            <div>
-                <li>Name:  {String(name)} </li>
-                <li>Ticket Price: {String(ticketPrice)}</li>
-                <li>Duration: {String(duration)}</li>
-            </div>
-            
-        );
-    }
-    export default function DataTable() {
-  return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-      />
-    </div>
-  );
-}*/
