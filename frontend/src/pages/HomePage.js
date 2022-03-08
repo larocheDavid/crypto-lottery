@@ -97,15 +97,13 @@ const HomePage = () => {
     <>
       <Header walletAddress={walletAddress} setWallet={setWallet} />
 
-      <div id="container">
+      
         <CreateLottery id="container"
           createLottery={handleCreateLottery}
           disabled={walletAddress.length === 0}
         />
-      </div>
-      <div id="container">
-        <ViewLottery name={"Lottery1"} ticketPrice={3424} duration={234} />
-      </div>
+    
+      
     </>
   );
   /*
