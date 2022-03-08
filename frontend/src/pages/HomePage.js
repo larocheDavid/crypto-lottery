@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "../Form"
+import Form from "../Form";
 import ViewLottery from "../components/ViewLottery";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
@@ -14,14 +14,13 @@ import {
 } from "../util/interact.js";
 import CreateLottery from "../components/CreateLottery";
 
-
 const HomePage = () => {
   //state variables
   const [walletAddress, setWallet] = useState("");
   const [status, setStatus] = useState("");
-  const [message, setMessage] = useState("No connection to the network."); //default message
-  // const [newMessage, setNewMessage] = useState("");
-  const [statusLottery, setStatusLottery] = useState("");
+  //const [message, setMessage] = useState("No connection to the network."); //default message
+  //const [newMessage, setNewMessage] = useState("");
+  //const [statusLottery, setStatusLottery] = useState("");
   const [lotteries, setLotteries] = useState([]);
 
   //called only once
@@ -81,11 +80,11 @@ const HomePage = () => {
   const handleCreateLottery = async (lottery) => {
     try {
       await createLottery(walletAddress, lottery);
-      console.log("lotteryCreated :", lottery)
+      console.log("lotteryCreated :", lottery);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const connectWalletPressed = async () => {
     const walletResponse = await connectWallet();
@@ -96,16 +95,20 @@ const HomePage = () => {
   //the UI of our component
   return (
     <>
-    <div> 
-      <Header walletAddress = {walletAddress} setWallet = {setWallet} /> 
-  
-      <CreateLottery createLottery={handleCreateLottery} disabled={walletAddress.length === 0} />
+      <Header walletAddress={walletAddress} setWallet={setWallet} />
 
-      <ViewLottery name = {"name"} ticketPrice = {3424} duration = {234} />
-    </div>
+      <div id="container">
+        <CreateLottery id="container"
+          createLottery={handleCreateLottery}
+          disabled={walletAddress.length === 0}
+        />
+      </div>
+      <div id="container">
+        <ViewLottery name={"name"} ticketPrice={3424} duration={234} />
+      </div>
     </>
   );
- /*
+  /*
     <div id="App-header">
       
       
@@ -144,7 +147,7 @@ const HomePage = () => {
 
     </div>
     */
-   /*
+  /*
     <div id="container">
     <CreateLottery
       createLottery={handleCreateLottery}

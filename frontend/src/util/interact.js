@@ -1,10 +1,14 @@
 require("dotenv").config();
-const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
+
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
+const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
 const web3 = createAlchemyWeb3(alchemyKey);
 
-const contractABI = require("../contract-abi.json");
-const contractAddress = "0xB65D2d02C64fc721131aCcB0E03a1Fa4c145FA93";
+//const contractABI = require("../contract-abi.json");
+//const contractAddress = "0xB65D2d02C64fc721131aCcB0E03a1Fa4c145FA93";
+
+const contractABI = require("../Lotherum.json").abi;
+const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
 
 export const lotherumContract = new web3.eth.Contract(
   contractABI,
@@ -16,15 +20,20 @@ export const lotherumContract = new web3.eth.Contract(
 //   return message;
 // };
 
-export const createLottery = async (address, {name, ticketPrice, duration}) => {
-  console.log("creating lottery ...")
+export const createLottery = async (
+  address,
+  { name, ticketPrice, duration }
+) => {
+  console.log("creating lottery ...");
   const transactionParameters = {
     from: address, // must match user's active address.
     to: contractAddress, // Required except during contract publications.
-    data: lotherumContract.methods.create_lottery(name).encodeABI(),
+    data: lotherumContract.methods
+      .create_lottery(name, ticketPrice, 200, duration)
+      .encodeABI(),
   };
 
-  console.log("sending transaction :", transactionParameters)
+  console.log("sending transaction :", transactionParameters);
 
   //sign the transaction
   try {
@@ -131,9 +140,10 @@ export const getCurrentWalletConnected = async () => {
 };
 
 export const getLotteries = async () => {
-  //const await name = lotherumContract.methods.create_lottery(name).encodeABI()
-  return ["lottery1", "lottery2"];
-}
+  const lotteries = await lotherumContract.methods.lotteries(0).duration;
+  console.log("This is the result ", lotteries);
+  return lotteries;
+};
 
 // export const updateMessage = async (address, message) => {
 //   //input error handling
