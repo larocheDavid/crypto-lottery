@@ -140,7 +140,7 @@ export const getCurrentWalletConnected = async () => {
 };
 
 export const getLotteries = async () => {
-  const lotteries = await lotherumContract.methods.lotteries(0).duration;
+  var lotteries = await lotherumContract.methods.get_lotteries();
   console.log("This is the result ", lotteries);
   return lotteries;
 };
