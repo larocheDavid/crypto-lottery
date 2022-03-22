@@ -1,4 +1,5 @@
 import React from "react";
+import ViewLottery from "./ViewLottery";
 import { useEffect, useState } from "react";
 import {
     TextField,
@@ -12,7 +13,7 @@ import {
 const CreateLottery = ({ createLottery, disabled }) => {
     const [name, setName] = useState("")
     const [ticketPrice, setTicketPrice] = useState(0)
-    const [duration, setDuration] = useState(1)
+    const [duration, setDuration] = useState(0)
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -65,6 +66,7 @@ const CreateLottery = ({ createLottery, disabled }) => {
 
     return (
         <>
+        <div id="container">
             <Button variant="outlined" color="primary" onClick={handleClickOpen} disabled={disabled}>
                 Create Lottery
             </Button>
@@ -82,6 +84,10 @@ const CreateLottery = ({ createLottery, disabled }) => {
                     </Button>
                 </DialogActions>
             </Dialog>
+            </div>
+        <div id="container">
+        <ViewLottery name={name} ticketPrice={ticketPrice} duration={duration} />
+      </div>
         </>
     )
 }

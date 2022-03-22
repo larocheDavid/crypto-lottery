@@ -1,12 +1,10 @@
+import React from 'react';
 import HomePage from './pages/HomePage'
-import './App.css';
+import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-    <HomePage></HomePage>
-    </div>
-  );
+
+  return ( <HomePage></HomePage> );
 }
 
 export default App;

@@ -33,6 +33,8 @@ export NODE_OPTIONS=--openssl-legacy-provider
 yarn install
 yarn start
 ```
+##### how to deploy smartcontract on ropsten
+yarn hardhat run scripts/deploy.js --network ropsten
 
 ##### development tools
 - Hardhat (ethereum development environment)

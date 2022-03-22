@@ -1,5 +1,7 @@
 import React from "react";
-import Form from "../Form"
+import Form from "../Form";
+import ViewLottery from "../components/ViewLottery";
+import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import {
   helloWorldContract,
@@ -8,17 +10,18 @@ import {
   loadCurrentMessage,
   getCurrentWalletConnected,
   createLottery,
+  getLotteries,
 } from "../util/interact.js";
 import CreateLottery from "../components/CreateLottery";
-
 
 const HomePage = () => {
   //state variables
   const [walletAddress, setWallet] = useState("");
   const [status, setStatus] = useState("");
-  const [message, setMessage] = useState("No connection to the network."); //default message
-  // const [newMessage, setNewMessage] = useState("");
-  const [statusLottery, setStatusLottery] = useState("");
+  //const [message, setMessage] = useState("No connection to the network."); //default message
+  //const [newMessage, setNewMessage] = useState("");
+  //const [statusLottery, setStatusLottery] = useState("");
+  const [lotteries, setLotteries] = useState([]);
 
   //called only once
   useEffect(async () => {
@@ -28,6 +31,9 @@ const HomePage = () => {
 
     const { address, status } = await getCurrentWalletConnected();
 
+    const lotteries_ = await getLotteries();
+
+    setLotteries(lotteries_);
     setWallet(address);
     setStatus(status);
 
@@ -74,11 +80,11 @@ const HomePage = () => {
   const handleCreateLottery = async (lottery) => {
     try {
       await createLottery(walletAddress, lottery);
-      console.log("lotteryCreated :", lottery)
+      console.log("lotteryCreated :", lottery);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const connectWalletPressed = async () => {
     const walletResponse = await connectWallet();
@@ -88,11 +94,22 @@ const HomePage = () => {
 
   //the UI of our component
   return (
-    <div id="container">
-      <CreateLottery
-        createLottery={handleCreateLottery}
-        disabled={walletAddress.length === 0}
-      />
+    <>
+      <Header walletAddress={walletAddress} setWallet={setWallet} />
+
+      
+        <CreateLottery id="container"
+          createLottery={handleCreateLottery}
+          disabled={walletAddress.length === 0}
+        />
+    
+      
+    </>
+  );
+  /*
+    <div id="App-header">
+      
+      
       <button id="walletButton" onClick={connectWalletPressed}>
         {walletAddress.length > 0 ? (
           "Connected: " +
@@ -103,7 +120,7 @@ const HomePage = () => {
           <span>Connect Wallet</span>
         )}
       </button>
-{/*
+{
       <h2 style={{ paddingTop: "50px" }}>Current Message:</h2>
       <p>{message}</p>
 
@@ -124,11 +141,20 @@ const HomePage = () => {
       </div>
       <div>
       <p id="statusLottery">{statusLottery}</p>
-      </div> */}
+      </div> }
 
     </div>
-
-  );
+    */
+  /*
+    <div id="container">
+    <CreateLottery
+      createLottery={handleCreateLottery}
+      disabled={walletAddress.length === 0}
+    />
+      
+    </div>
+  */
+  //)}
 };
 
 export default HomePage;

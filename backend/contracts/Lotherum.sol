@@ -1,34 +1,78 @@
-// Specifies the version of Solidity, using semantic versioning.
-// Learn more: https://solidity.readthedocs.io/en/v0.5.10/layout-of-source-files.html#pragma
+// SPDX-License-Identifier: HEPIA
 pragma solidity >=0.7.3;
+pragma experimental ABIEncoderV2;
 
-// Defines a contract named `HelloWorld`.
-// A contract is a collection of functions and data (its state). Once deployed, a contract resides at a specific address on the Ethereum blockchain. Learn more: https://solidity.readthedocs.io/en/v0.5.10/structure-of-a-contract.html
 contract Lotherum {
-    struct Lottery {
-        string Name;
-        // uint EntryPrice;
-        // uint Duration;
-    }
-    event createdLottered(string new_lottery_name);
+    address public owner;
+    uint weiUnit = 1 wei;
 
-    // Declares a state variable `message` of type `string`.
-    // State variables are variables whose values are permanently stored in contract storage. The keyword `public` makes variables accessible from outside a contract and creates a function that other contracts or clients can call to access the value.
     Lottery[] public lotteries;
 
-    // Similar to many class-based object-oriented languages, a constructor is a special function that is only executed upon contract creation.
-    // Constructors are used to initialize the contract's data. Learn more:https://solidity.readthedocs.io/en/v0.5.10/contracts.html#constructors
-    constructor() {}
+    struct Lottery {
+    
+        string name;
+        uint ticketPrice;
+        uint ticketsNumber;
+        uint duration;
+        /*
+        address creator;
+        address payable[] players;
+        address payable pot;
+        */
+    }
 
-    // function create_lottery(string memory name, uint entry_price, uint duration) public {
-    //     Lottery memory new_lottery = Lottery(name, entry_price, duration);
-    //     lotteries.push(new_lottery);
-    //     emit createdLottered(new_lottery.Name);
-    // }
-    function create_lottery(string memory name) public {
-        Lottery memory new_lottery = Lottery(name);
+    constructor() {
+        owner = msg.sender;
+    }
+    event createdLottered(string lottery_id);
+
+    function create_lottery(string memory name, uint ticketPrice, uint ticketsNumber, uint duration) public {
+        Lottery memory new_lottery = Lottery(name, ticketPrice, ticketsNumber, duration);
+        //Lottery[] lottery = new 
         lotteries.push(new_lottery);
-        emit createdLottered(new_lottery.Name);
+        emit createdLottered( new_lottery.name);
+    }
+
+    function find_lottery_index(string memory name) public view returns (uint) {
+        for (uint i=0; i<lotteries.length; i++) {
+            if(keccak256(bytes(lotteries[i].name)) == keccak256(bytes(name))) {
+                return i;
+            }
+        }
+        return 1000; 
+    }
+
+    /*function get_lottery(string memory name) public view returns (Lottery) {
+        return lotteries[find_lottery_index(name)];
+    }*/
+
+    function get_lotteries() public view returns (Lottery[] memory) {
+        return lotteries;
+    }
+
+    function getTicketPrice(string memory name) public view returns (uint)  {
+        //require(find_lottery(id) == id, "Lottery not find.");
+        return lotteries[find_lottery_index(name)].ticketPrice;
+    }
+
+    function getTicketsNumber(string memory name) public view returns (uint)  {
+        return lotteries[find_lottery_index(name)].ticketsNumber;
+    }
+
+    function getDuration(string memory name) public view returns (uint)  {
+        return lotteries[find_lottery_index(name)].duration;
+    }
+   
+    function buyTickets(string memory name, uint amount) public payable {
+
+        uint index = find_lottery_index(name);
+        require(msg.value >= amount * lotteries[index].ticketPrice * weiUnit);
+        require(lotteries[index].ticketsNumber >= amount, "Not enough tickets to complete this purchase.");
+        while (amount != 0) {
+            //lotteries[index].players.push(payable(msg.sender));
+            lotteries[index].ticketsNumber--;
+            amount--;
+        }
+        //players[index].transfer(...);
     }
 }
-
