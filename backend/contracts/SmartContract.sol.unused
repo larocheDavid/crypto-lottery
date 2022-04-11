@@ -1,0 +1,79 @@
+//SPDX-License-Identifier: Unlicense
+pragma solidity ^0.8.0;
+
+//import "hardhat/console.sol";
+
+contract SmartContract {
+
+  struct Lottery {
+    bool claimed;// true if winner has being paid
+    uint endTime;// lottery close time (unix date: time since epoch)
+    uint startPot;// initial pot in wei
+    uint ticketPrice;// price in wei
+    address creator;// creator wallet address
+    address[] buyers;// buyer wallet address, accepts duplicates
+  }
+  Lottery[] private lotteries;
+
+
+  // create a new lottery
+  // lottery end time is calculated from duration (argument)
+  // initial pot comes directly from the amount sent by the player (solidity global msg.value)
+  function createLottery(uint duration_in_seconds, uint ticketPrice_wei) payable public returns(uint) {
+    require(duration_in_seconds>=1800);// min 30 min
+    require(msg.value>=1);// min 1 wei pot
+    require(ticketPrice_wei>=1);// min 1 wei ticketPrice
+    address[] memory emptyList;
+    lotteries.push(
+      Lottery({
+        claimed: false,
+        endTime: block.timestamp + duration_in_seconds,
+        startPot: msg.value,
+        ticketPrice: ticketPrice_wei,
+        creator: msg.sender,
+        buyers: emptyList
+      })
+    );
+    return lotteries.length-1;
+  }
+
+  // basic pseudo random generator
+  function rand() private view returns(uint) {
+    return uint(block.difficulty+block.gaslimit+block.number+block.timestamp);
+  }
+
+  // look for lottery that has ended
+  // pick a random winner (pick creator if zero ticket sold)
+  // send eth to winner (sum of sold tickets plus the initial pot)
+  function updateWinner() public {
+    for (uint i=0; i<lotteries.length; i++) {
+      if (lotteries[i].claimed==false && lotteries[i].endTime<block.timestamp) {
+        lotteries[i].claimed=true;
+        if (lotteries[i].buyers.length==0) {
+          address payable winner = payable(lotteries[i].creator);
+          assert(winner.send(lotteries[i].startPot));
+        } else {
+          address payable winner = payable(lotteries[i].buyers[rand()%lotteries[i].buyers.length]);
+          assert(winner.send(lotteries[i].startPot + lotteries[i].buyers.length * lotteries[i].ticketPrice));
+        }
+      }
+    }
+  }
+
+  function getLotteries() public view returns(Lottery[] memory) {
+    return lotteries;
+  }
+
+  function getLottery(uint lotteryIdx) public view returns(Lottery memory) {
+    require(lotteryIdx<lotteries.length);
+    return lotteries[lotteryIdx];
+  }
+
+  function buyTicket(uint lotteryIdx) payable public {
+    require(lotteryIdx<lotteries.length);
+    require(lotteries[lotteryIdx].ticketPrice<=msg.value);
+    require(lotteries[lotteryIdx].endTime<block.timestamp);
+    lotteries[lotteryIdx].buyers.push(msg.sender);
+  }
+
+}
