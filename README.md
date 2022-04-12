@@ -18,6 +18,7 @@ crypto-lottery is an ethereum decentralized application project
 1st terminal:
 ```bash
 cd dapp
+git clone https://github.com/isaacs/nave.git
 sh start_env.sh
 cd contract
 npx hardhat compile
