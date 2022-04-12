@@ -1,0 +1,357 @@
+import React, { useState, useEffect } from "react";
+import { ethers } from "ethers";
+
+function App() {
+
+  const [greet, setGreet] = useState('');
+  const [balance, setBalance] = useState('');
+  const [depositValue, setDepositValue] = useState('');
+  const [greetingValue, setGreetingValue] = useState('');
+
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+
+  const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+  const contractABI = [
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_greeting",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "lotteryIdx",
+          "type": "uint256"
+        }
+      ],
+      "name": "buyTicket",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "duration_in_seconds",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "ticketPrice_wei",
+          "type": "uint256"
+        }
+      ],
+      "name": "createLottery",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "deposit",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getLotteries",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "claimed",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "endTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startPot",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "ticketPrice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "creator",
+              "type": "address"
+            },
+            {
+              "internalType": "address[]",
+              "name": "buyers",
+              "type": "address[]"
+            }
+          ],
+          "internalType": "struct SmartContract.Lottery[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "lotteryIdx",
+          "type": "uint256"
+        }
+      ],
+      "name": "getLottery",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "claimed",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "endTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startPot",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "ticketPrice",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "creator",
+              "type": "address"
+            },
+            {
+              "internalType": "address[]",
+              "name": "buyers",
+              "type": "address[]"
+            }
+          ],
+          "internalType": "struct SmartContract.Lottery",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "greet",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_greeting",
+          "type": "string"
+        }
+      ],
+      "name": "setGreeting",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "updateWinner",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ];
+
+  const contract = new ethers.Contract(contractAddress, contractABI, signer);
+
+  useEffect( () => {
+
+    const connectWallet = async () => {
+      await provider.send("eth_requestAccounts", []);
+    }
+
+    const getBalance = async () => {
+      const balance = await provider.getBalance(contractAddress);
+      const balanceFormated = ethers.utils.formatEther(balance);
+      setBalance(balanceFormated);
+    }
+
+    const getGreeting = async () => {
+      const greeting = await contract.greet();
+      setGreet(greeting);
+    }
+
+    connectWallet().catch(console.error);
+    getBalance().catch(console.error);
+    getGreeting().catch(console.error);
+  });
+
+  const handleDepositChange = (e) => {
+    setDepositValue(e.target.value);
+  }
+
+  const handleGreetingChange = (e) => {
+    setGreetingValue(e.target.value);
+  }
+
+  const handleDepositSubmit = async (e) => {
+    e.preventDefault();
+    const ethValue = ethers.utils.parseEther(depositValue);// string ether to uint wei
+    const depositEth = await contract.deposit({value: ethValue});
+    await depositEth.wait();
+    const balance = await provider.getBalance(contractAddress);
+    const balanceFormated = ethers.utils.formatEther(balance);
+    setBalance([balanceFormated].join(''));
+    setDepositValue('');
+  }
+
+  const handleGreetingSubmit = async (e) => {
+    e.preventDefault();
+    const greetingUpdate = await contract.setGreeting(greetingValue);
+    await greetingUpdate.wait();
+    setGreet(greetingValue);
+    setGreetingValue('');
+  }
+
+
+  const lotteryList = [
+    {
+      claimed: 'yes',
+      endTime: 0,
+      startPot: 0,
+      ticketPrice: 0,
+      creator: '0x0',
+      buyers: ['0x1','0x2','0x3']
+    },
+    {
+      claimed: 'yes',
+      endTime: 1,
+      startPot: 1,
+      ticketPrice: 1,
+      creator: '0x1',
+      buyers: ['0x1','0x2','0x3']
+    },
+    {
+      claimed: 'yes',
+      endTime: 2,
+      startPot: 2,
+      ticketPrice: 2,
+      creator: '0x2',
+      buyers: ['0x1','0x2','0x3']
+    }
+  ];
+
+
+  var lottery0 = '---';
+  const osef = async () => {
+      console.log("A");
+      await contract.createLottery(2000,10).deposit(1);
+      console.log("B");
+      // const res = await contract.getLottery(0);
+      // // console.log(res);
+      // lottery0 = res;
+      // console.log("AA");
+      // console.log(lottery0)
+      // console.log("BB");
+  }
+  osef();
+
+
+  return (
+    <div className="container">
+
+      <div className="row mt-5">
+        <div className="col">
+          <h4>SmartContract</h4>
+          <pre>address <b>{contractAddress}</b></pre>
+          <pre>lottery0 <b>{lottery0}</b></pre>
+          <pre>-------------------</pre>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col">
+          <form onSubmit={handleDepositSubmit}>
+            <div className="mb-3">
+              <pre>balance <b>{balance}</b></pre>
+              <input type="number" className="form-control" placeholder="0" onChange={handleDepositChange} value={depositValue} />
+              <button type="submit" className="btn btn-success">Deposit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col">
+          <form onSubmit={handleGreetingSubmit}>
+            <div className="mb-3">
+              <pre>greeting <b>{greet}</b></pre>
+              <input type="text" className="form-control" placeholder="" onChange={handleGreetingChange} value={greetingValue}/>
+              <button type="submit" className="btn btn-dark">Change</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div className="row mt-5">
+        <div className="col">
+          <ul>
+            {lotteryList.map((lottery,index) =>
+              <li key={index} >
+                <pre>
+                  lottery <b>{index}</b><br></br>
+                  claimed <b>{lottery.claimed} </b><br></br>
+                  endTime <b>{lottery.endTime} </b><br></br>
+                  startPot <b>{lottery.startPot} </b><br></br>
+                  ticketPrice <b>{lottery.ticketPrice} </b><br></br>
+                  creator <b>{lottery.creator} </b><br></br>
+                  buyers {lottery.buyers.map((buyer) => <b>{buyer} </b>)}
+                </pre>
+              </li>
+            )}
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  );
+}
+
+export default App;

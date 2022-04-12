@@ -13,10 +13,37 @@ crypto-lottery is an ethereum decentralized application project
 
 ![fig1][1]
 
-##### how to run backend
+##### how to run backend and frontend (local)
+
+1st terminal:
+```bash
+cd dapp
+sh start_env.sh
+cd contract
+npx hardhat compile
+npx hardhat node
+```
+
+2nd terminal:
+```bash
+cd dapp
+sh start_env.sh
+cd contract
+npx hardhat run scripts/sample-script.js
+```
+
+3rd terminal:
+```bash
+cd dapp
+sh start_env.sh
+cd client
+npm start
+```
+
+##### how to run backend (live)
 TODO
 
-##### how to run frontend
+##### how to run frontend (live)
 ```bash
 node --version
 v16.0.0
