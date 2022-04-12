@@ -39,6 +39,7 @@ npx hardhat run scripts/sample-script.js
 cd dapp
 sh start_env.sh
 cd client
+npm install react-scripts
 npm start
 ```
 
