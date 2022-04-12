@@ -21,6 +21,7 @@ cd dapp
 git clone https://github.com/isaacs/nave.git
 sh start_env.sh
 cd contract
+npm install hardhat
 npx hardhat compile
 npx hardhat node
 ```
