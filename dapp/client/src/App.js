@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 
+import {
+  TextField,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle
+} from '@material-ui/core';
+
 function App() {
 
   const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
@@ -98,6 +107,37 @@ function App() {
     .then(createLotteryText='created')
     .catch(console.error);
   }
+
+  const renderForm = () => {
+    return (<>
+        <div>
+        <TextField
+            fullWidth
+            margin="normal"
+            label="Lottery Name"
+            id="name"
+            type="text"
+            onChange={(event) => { setName(event.target.value) }}
+        />
+        <TextField
+            fullWidth
+            margin="normal"
+            label="Ticket Price"
+            id="ticketPrice"
+            type="number"
+            onChange={(event) => { setTicketPrice(event.target.value) }}
+        />
+        <TextField
+            fullWidth
+            margin="normal"
+            label="Duration"
+            id="duration"
+            type="number"
+            onChange={(event) => { setDuration(event.target.value) }}
+        />
+        </div>
+    </>)
+}
 
 
   return (
